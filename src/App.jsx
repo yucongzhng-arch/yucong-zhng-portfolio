@@ -10,6 +10,12 @@ const navigation = [
 
 const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
+const pageRange = (start, end) =>
+  Array.from({ length: end - start + 1 }, (_, index) => start + index);
+
+const pageImage = (page) =>
+  `/images/portfolio-pages/page-${String(page).padStart(2, "0")}.jpg`;
+
 const stats = [
   { value: "85", label: "pages in portfolio" },
   { value: "8", label: "core project chapters" },
@@ -38,11 +44,11 @@ const experience = [
 const projects = [
   {
     id: "01",
-    title: "Wearable Assistive Training Device",
+    title: "Lao Yi Dong Assistive Trainer",
     category: "Healthy aging / wearable product",
     description:
       "A muscle-support concept that blends rehabilitation, daily exercise, and safer movement for older users.",
-    image: "/images/project-assistive.png",
+    image: pageImage(8),
     tags: ["User research", "Structure design", "Aging-friendly"],
     layout: "wide",
     year: "2026",
@@ -56,7 +62,9 @@ const projects = [
       "Mapped daily movement and rehabilitation pain points into wearable support opportunities.",
       "Explored form language around muscle assistance, soft contact zones, and visible safety cues.",
       "Built the presentation around exploded structure, three-view explanation, and in-context use."
-    ]
+    ],
+    pages: pageRange(5, 8),
+    pdfRange: "PDF pages 05-08"
   },
   {
     id: "02",
@@ -64,7 +72,7 @@ const projects = [
     category: "Brand language / mobility concept",
     description:
       "An angular speedboat proposal extending Mitsubishi's visual language into a lightweight competitive form.",
-    image: "/images/project-racing-boat.png",
+    image: pageImage(18),
     tags: ["CMF direction", "Aerodynamic styling", "Concept storytelling"],
     layout: "standard",
     year: "2026",
@@ -78,15 +86,17 @@ const projects = [
       "Analyzed Mitsubishi visual cues and converted them into surface breaks, front posture, and color rules.",
       "Balanced aerodynamic direction with an object that still reads as fast, competitive, and manufacturable.",
       "Developed multiple colorways to test how the concept changes across sport, premium, and industrial moods."
-    ]
+    ],
+    pages: pageRange(9, 18),
+    pdfRange: "PDF pages 09-18"
   },
   {
     id: "03",
-    title: "Integrated Roof Camp System",
+    title: "LUNE Automatic Roof Tent",
     category: "Outdoor mobility / product system",
     description:
       "An SUV-mounted camping concept focused on fast deployment, compact integration, and stronger scene value.",
-    image: "/images/project-camper.png",
+    image: pageImage(25),
     tags: ["Scenario design", "Product ecosystem", "3D presentation"],
     layout: "standard",
     year: "2026",
@@ -100,15 +110,17 @@ const projects = [
       "Studied travel scenarios around parking, unfolding, storage, and night use.",
       "Designed the upper structure as a compact add-on that keeps visual continuity with the car body.",
       "Presented the concept through assembly views, detail renders, and use-scene framing."
-    ]
+    ],
+    pages: pageRange(19, 28),
+    pdfRange: "PDF pages 19-28"
   },
   {
     id: "04",
-    title: "Ocean Safety Island",
+    title: "Manta Matrix Safety Island",
     category: "Emergency equipment / public safety",
     description:
       "A modular rescue proposal combining flotation, AI monitoring, and underwater assistance into one safety system.",
-    image: "/images/project-safety-island.png",
+    image: pageImage(37),
     tags: ["System thinking", "Exploded view", "Public service"],
     layout: "wide",
     year: "2026",
@@ -122,29 +134,105 @@ const projects = [
       "Broke the rescue context into detection, flotation, oxygen support, propulsion, and storage needs.",
       "Separated the product into visible modules so each emergency function can be understood quickly.",
       "Used exploded presentation to communicate complex structure without losing the overall object identity."
-    ]
+    ],
+    pages: pageRange(29, 37),
+    pdfRange: "PDF pages 29-37"
   },
   {
     id: "05",
-    title: "Origin Discovery Deck",
-    category: "Consumer electronics / sound experience",
+    title: "Orbit Rover Space Cleaner",
+    category: "Space equipment / modular robotics",
     description:
-      "A modular music device with nostalgic cues, tactile controls, and a stronger emotional connection to audio playback.",
-    image: "/images/project-origin-deck.png",
-    tags: ["CMF", "Detail design", "Interface-object blend"],
+      "A modular space-debris cleaning robot that combines net capture, laser clearing, and robotic-arm recovery.",
+    image: pageImage(44),
+    tags: ["System design", "Prototype making", "Scenario flow"],
     layout: "standard",
     year: "2026",
-    role: "Consumer electronics / interface object / visual storytelling",
-    tools: "Rhino, KeyShot, CMF layout",
+    role: "Future mobility system / robotics concept / prototype presentation",
+    tools: "Rhino, KeyShot, physical prototype, layout design",
     challenge:
-      "Digital music products often lose tactile memory, so this project explores how physical controls can rebuild emotional attachment.",
+      "Orbital debris requires a cleaning system that can respond to different debris sizes without relying on one fixed mechanism.",
     outcome:
-      "A modular music device with nostalgic visual references, orange-white CMF, touchable controls, and an object-like interface.",
+      "The Orbit Rover concept uses modular capture, laser, robotic arm, and propulsion systems to cover multiple space-cleaning scenarios.",
     process: [
-      "Extracted emotional cues from recorders, decks, and classic playback hardware.",
-      "Translated those cues into modular parts, knobs, slots, screens, and handheld proportions.",
-      "Focused the final board on detail renders so the interaction language reads at a glance."
-    ]
+      "Framed the orbital debris problem through risk size, future growth, and cleaning difficulty.",
+      "Built a process flow for launch, capture, debris breakdown, recovery, and reset.",
+      "Presented both prototype-making logic and final detail systems to make the speculative product feel credible."
+    ],
+    pages: pageRange(38, 49),
+    pdfRange: "PDF pages 38-49"
+  },
+  {
+    id: "06",
+    title: "Modular Music Controller",
+    category: "Consumer electronics / music creation",
+    description:
+      "A next-generation music creation terminal with magnetic modules, AI guidance, app control, packaging, and use scenes.",
+    image: pageImage(55),
+    tags: ["Modular hardware", "AI interaction", "Packaging system"],
+    layout: "standard",
+    year: "2026",
+    role: "Consumer electronics / interaction hardware / product storytelling",
+    tools: "Rhino, KeyShot, UI layout, packaging presentation",
+    challenge:
+      "Music controllers often force users into fixed layouts, making live performance and creation less flexible across scenarios.",
+    outcome:
+      "The final system combines magnetic modules, AI-assisted mixing, app interfaces, packaging, and lifestyle scenes into one product family.",
+    process: [
+      "Defined the product around DJ, electronic music, and live performance use cases.",
+      "Developed modular hardware details including knobs, dials, magnetic supports, and recording accessories.",
+      "Extended the design into app screens, packaging, video-script flow, and user-scene boards."
+    ],
+    pages: pageRange(50, 65),
+    pdfRange: "PDF pages 50-65"
+  },
+  {
+    id: "07",
+    title: "Modular Smart HiFi Speaker",
+    category: "Home audio / modular furniture object",
+    description:
+      "A bamboo-inspired HiFi speaker system balancing modular storage, acoustic presence, and home-space integration.",
+    image: pageImage(70),
+    tags: ["HiFi audio", "Module storage", "Eastern CMF"],
+    layout: "standard",
+    year: "2026",
+    role: "Home product / CMF exploration / structural presentation",
+    tools: "Rhino, KeyShot, physical mockup, detail layout",
+    challenge:
+      "Traditional HiFi speakers can feel heavy, static, and disconnected from flexible home scenarios.",
+    outcome:
+      "The project turns the speaker into a modular furniture-like object with bamboo-inspired surfaces, visible structure, and adaptable storage.",
+    process: [
+      "Set design goals around modular assembly, space adaptation, HiFi quality, and home integration.",
+      "Explored sketches, physical scale models, acoustic structure, and bamboo-form references.",
+      "Detailed the final product through scene renders, structural logic, ports, controls, and dimensions."
+    ],
+    pages: pageRange(66, 77),
+    pdfRange: "PDF pages 66-77"
+  },
+  {
+    id: "08",
+    title: "Other Works & Commercial Projects",
+    category: "Sketching / commercial landing / visual work",
+    description:
+      "A compact chapter collecting hand drawing, visual design, commercial projects, computer cases, and car-culture work.",
+    image: pageImage(81),
+    tags: ["Sketching", "Commercial design", "Visual portfolio"],
+    layout: "wide",
+    year: "2026",
+    role: "Commercial project support / visual design / sketch presentation",
+    tools: "Sketching, Rhino, Photoshop, presentation layout",
+    challenge:
+      "Portfolio side work needs to show breadth without breaking the rhythm of the main product-design chapters.",
+    outcome:
+      "The final chapter works as a compressed archive of drawing ability, landed projects, computer cases, car visuals, and modification parts.",
+    process: [
+      "Grouped side projects by drawing, landed commercial work, computer hardware, graphic culture, and automotive parts.",
+      "Kept the pages image-forward so viewers can scan capability quickly.",
+      "Used the chapter as a closing proof of versatility beyond the seven main product concepts."
+    ],
+    pages: pageRange(78, 84),
+    pdfRange: "PDF pages 78-84"
   }
 ];
 
@@ -331,8 +419,8 @@ function App() {
                 <h2>Large-format work samples shaped for a more editorial web experience.</h2>
               </div>
               <p className="section-note">
-                Built from the existing portfolio pages, then reframed for faster
-                browsing, stronger impact, and clearer project differentiation.
+                Rebuilt from the source PDF sequence: 8 project chapters and
+                every portfolio page from PDF page 05 to page 84.
               </p>
             </div>
 
@@ -356,7 +444,9 @@ function App() {
                         <span key={tag}>{tag}</span>
                       ))}
                     </div>
-                    <span className="project-card__cta">Open detail</span>
+                    <span className="project-card__cta">
+                      Open {project.pages.length} pages
+                    </span>
                   </div>
                 </a>
               ))}
@@ -457,6 +547,12 @@ function ProjectDetail({ project }) {
               <span>Tools</span>
               <strong>{project.tools}</strong>
             </div>
+            <div>
+              <span>PDF Pages</span>
+              <strong>
+                {project.pdfRange} · {project.pages.length} pages
+              </strong>
+            </div>
           </aside>
 
           <div className="project-detail__story">
@@ -482,6 +578,37 @@ function ProjectDetail({ project }) {
               </div>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section className="project-detail__pages">
+        <div className="frame project-pages__head">
+          <div>
+            <p className="eyebrow">Original PDF Pages</p>
+            <h2>Complete project pages following the portfolio layout.</h2>
+          </div>
+          <p>
+            This section restores the missing source pages in order:
+            {" "}
+            {project.pdfRange}.
+          </p>
+        </div>
+
+        <div className="frame project-pages">
+          {project.pages.map((page, index) => (
+            <figure className="portfolio-page" key={page}>
+              <img
+                src={asset(pageImage(page))}
+                alt={`${project.title} portfolio page ${String(page).padStart(2, "0")}`}
+                loading={index < 2 ? "eager" : "lazy"}
+                decoding="async"
+              />
+              <figcaption>
+                <span>PDF PAGE {String(page).padStart(2, "0")}</span>
+                <strong>{project.title}</strong>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </section>
 
