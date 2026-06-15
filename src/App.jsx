@@ -6,6 +6,8 @@ const navigation = [
   { label: "Contact", href: "#contact" }
 ];
 
+const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 const stats = [
   { value: "85", label: "pages in portfolio" },
   { value: "8", label: "core project chapters" },
@@ -146,9 +148,9 @@ function App() {
             muted
             loop
             playsInline
-            poster="/images/cover-metal.png"
+            poster={asset("/images/cover-metal.png")}
           >
-            <source src="/videos/hero-loop.webm" type="video/webm" />
+            <source src={asset("/videos/hero-loop.webm")} type="video/webm" />
           </video>
 
           <div className="hero__overlay" />
@@ -178,7 +180,7 @@ function App() {
 
             <aside className="hero__art" aria-label="Portfolio cover preview">
               <div className="hero__art-image">
-                <img src="/images/cover-metal.png" alt="Portfolio cover artwork" />
+                <img src={asset("/images/cover-metal.png")} alt="Portfolio cover artwork" />
               </div>
 
               <div className="hero__art-copy">
@@ -195,7 +197,7 @@ function App() {
           <div className="frame profile">
             <div className="profile__visual">
               <div className="profile__portrait">
-                <img src="/images/profile-team.jpg" alt="Yucong Zhng portrait" />
+                <img src={asset("/images/profile-team.jpg")} alt="Yucong Zhng portrait" />
               </div>
               <div className="profile__badge">
                 <span>Product Designer</span>
@@ -266,7 +268,7 @@ function App() {
                   className={`project-card project-card--${project.layout}`}
                   key={project.id}
                 >
-                  <img src={project.image} alt={project.title} loading="lazy" />
+                  <img src={asset(project.image)} alt={project.title} loading="lazy" />
                   <div className="project-card__overlay" />
                   <div className="project-card__content">
                     <span className="project-card__id">{project.id}</span>
