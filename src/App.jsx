@@ -176,16 +176,16 @@ function App() {
               </div>
             </div>
 
-            <aside className="hero__panel">
-              <div className="hero__panel-image">
+            <aside className="hero__art" aria-label="Portfolio cover preview">
+              <div className="hero__art-image">
                 <img src="/images/cover-metal.png" alt="Portfolio cover artwork" />
               </div>
 
-              <div className="hero__panel-copy">
-                <p>Industrial Design</p>
-                <p>Mobility Futures</p>
-                <p>Wearable Rehab</p>
-                <p>Product Systems</p>
+              <div className="hero__art-copy">
+                <span>Industrial Design</span>
+                <span>Mobility Futures</span>
+                <span>Wearable Rehab</span>
+                <span>Product Systems</span>
               </div>
             </aside>
           </div>
