@@ -195,7 +195,7 @@ function App() {
           <div className="frame profile">
             <div className="profile__visual">
               <div className="profile__portrait">
-                <img src="/images/portrait.png" alt="Yucong Zhng portrait" />
+                <img src="/images/profile-team.jpg" alt="Yucong Zhng portrait" />
               </div>
               <div className="profile__badge">
                 <span>Product Designer</span>
