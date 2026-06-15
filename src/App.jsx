@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 const navigation = [
   { label: "Home", href: "#home" },
   { label: "Profile", href: "#profile" },
@@ -42,7 +44,19 @@ const projects = [
       "A muscle-support concept that blends rehabilitation, daily exercise, and safer movement for older users.",
     image: "/images/project-assistive.png",
     tags: ["User research", "Structure design", "Aging-friendly"],
-    layout: "wide"
+    layout: "wide",
+    year: "2026",
+    role: "Research / product concept / structure presentation",
+    tools: "Rhino, KeyShot, presentation layout",
+    challenge:
+      "Older users and rehabilitation beginners need exercise support that feels protective without becoming a heavy medical device.",
+    outcome:
+      "The concept combines wearable muscle support, movement guidance, and safer training scenarios into one approachable product story.",
+    process: [
+      "Mapped daily movement and rehabilitation pain points into wearable support opportunities.",
+      "Explored form language around muscle assistance, soft contact zones, and visible safety cues.",
+      "Built the presentation around exploded structure, three-view explanation, and in-context use."
+    ]
   },
   {
     id: "02",
@@ -52,7 +66,19 @@ const projects = [
       "An angular speedboat proposal extending Mitsubishi's visual language into a lightweight competitive form.",
     image: "/images/project-racing-boat.png",
     tags: ["CMF direction", "Aerodynamic styling", "Concept storytelling"],
-    layout: "standard"
+    layout: "standard",
+    year: "2026",
+    role: "Brand language extension / mobility styling / CMF",
+    tools: "Rhino, KeyShot, CMF board",
+    challenge:
+      "The project asked how Mitsubishi's aggressive automotive identity could be translated into a water mobility product.",
+    outcome:
+      "A faceted racing boat proposal with sharper proportion, exposed power details, and a brand-driven CMF system.",
+    process: [
+      "Analyzed Mitsubishi visual cues and converted them into surface breaks, front posture, and color rules.",
+      "Balanced aerodynamic direction with an object that still reads as fast, competitive, and manufacturable.",
+      "Developed multiple colorways to test how the concept changes across sport, premium, and industrial moods."
+    ]
   },
   {
     id: "03",
@@ -62,7 +88,19 @@ const projects = [
       "An SUV-mounted camping concept focused on fast deployment, compact integration, and stronger scene value.",
     image: "/images/project-camper.png",
     tags: ["Scenario design", "Product ecosystem", "3D presentation"],
-    layout: "standard"
+    layout: "standard",
+    year: "2026",
+    role: "Scenario design / vehicle accessory / product system",
+    tools: "Rhino, KeyShot, exploded layout",
+    challenge:
+      "Outdoor users need a roof camping solution that opens quickly, stores compactly, and feels integrated with the vehicle.",
+    outcome:
+      "A roof-mounted camp system that turns the vehicle into a more complete rest, shade, and shelter platform.",
+    process: [
+      "Studied travel scenarios around parking, unfolding, storage, and night use.",
+      "Designed the upper structure as a compact add-on that keeps visual continuity with the car body.",
+      "Presented the concept through assembly views, detail renders, and use-scene framing."
+    ]
   },
   {
     id: "04",
@@ -72,7 +110,19 @@ const projects = [
       "A modular rescue proposal combining flotation, AI monitoring, and underwater assistance into one safety system.",
     image: "/images/project-safety-island.png",
     tags: ["System thinking", "Exploded view", "Public service"],
-    layout: "wide"
+    layout: "wide",
+    year: "2026",
+    role: "Public safety system / modular equipment / service concept",
+    tools: "Rhino, KeyShot, system diagram",
+    challenge:
+      "Sea rescue equipment must be visible, stable, modular, and capable of supporting multiple rescue tasks under pressure.",
+    outcome:
+      "A safety island concept integrating flotation, AI oxygen mask monitoring, underwater power assistance, and rescue storage.",
+    process: [
+      "Broke the rescue context into detection, flotation, oxygen support, propulsion, and storage needs.",
+      "Separated the product into visible modules so each emergency function can be understood quickly.",
+      "Used exploded presentation to communicate complex structure without losing the overall object identity."
+    ]
   },
   {
     id: "05",
@@ -82,7 +132,19 @@ const projects = [
       "A modular music device with nostalgic cues, tactile controls, and a stronger emotional connection to audio playback.",
     image: "/images/project-origin-deck.png",
     tags: ["CMF", "Detail design", "Interface-object blend"],
-    layout: "standard"
+    layout: "standard",
+    year: "2026",
+    role: "Consumer electronics / interface object / visual storytelling",
+    tools: "Rhino, KeyShot, CMF layout",
+    challenge:
+      "Digital music products often lose tactile memory, so this project explores how physical controls can rebuild emotional attachment.",
+    outcome:
+      "A modular music device with nostalgic visual references, orange-white CMF, touchable controls, and an object-like interface.",
+    process: [
+      "Extracted emotional cues from recorders, decks, and classic playback hardware.",
+      "Translated those cues into modular parts, knobs, slots, screens, and handheld proportions.",
+      "Focused the final board on detail renders so the interaction language reads at a glance."
+    ]
   }
 ];
 
@@ -117,6 +179,15 @@ const contactLinks = [
 ];
 
 function App() {
+  const [activeHash, setActiveHash] = useState(() => window.location.hash);
+  const activeProject = projects.find((project) => activeHash === `#/project/${project.id}`);
+
+  useEffect(() => {
+    const handleHashChange = () => setActiveHash(window.location.hash);
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   return (
     <div className="site-shell">
       <header className="topbar">
@@ -140,6 +211,9 @@ function App() {
         </div>
       </header>
 
+      {activeProject ? (
+        <ProjectDetail project={activeProject} />
+      ) : (
       <main>
         <section className="hero" id="home">
           <video
@@ -264,9 +338,11 @@ function App() {
 
             <div className="projects-grid">
               {projects.map((project) => (
-                <article
+                <a
                   className={`project-card project-card--${project.layout}`}
+                  href={`#/project/${project.id}`}
                   key={project.id}
+                  aria-label={`Open ${project.title} detail page`}
                 >
                   <img src={asset(project.image)} alt={project.title} loading="lazy" />
                   <div className="project-card__overlay" />
@@ -280,8 +356,9 @@ function App() {
                         <span key={tag}>{tag}</span>
                       ))}
                     </div>
+                    <span className="project-card__cta">Open detail</span>
                   </div>
-                </article>
+                </a>
               ))}
             </div>
           </div>
@@ -326,7 +403,101 @@ function App() {
           </div>
         </section>
       </main>
+      )}
     </div>
+  );
+}
+
+function ProjectDetail({ project }) {
+  const currentIndex = projects.findIndex((item) => item.id === project.id);
+  const previousProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+  const nextProject = projects[(currentIndex + 1) % projects.length];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [project.id]);
+
+  return (
+    <main className="project-detail">
+      <section className="project-detail__hero">
+        <div className="frame project-detail__hero-grid">
+          <div className="project-detail__intro">
+            <a className="detail-back" href="#projects">
+              Back to selected work
+            </a>
+            <p className="eyebrow">{project.id} / {project.category}</p>
+            <h1>{project.title}</h1>
+            <p className="project-detail__lead">{project.description}</p>
+
+            <div className="project-detail__tags">
+              {project.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="project-detail__media">
+            <img src={asset(project.image)} alt={project.title} />
+          </div>
+        </div>
+      </section>
+
+      <section className="project-detail__body">
+        <div className="frame project-detail__content">
+          <aside className="project-detail__meta">
+            <div>
+              <span>Year</span>
+              <strong>{project.year}</strong>
+            </div>
+            <div>
+              <span>Role</span>
+              <strong>{project.role}</strong>
+            </div>
+            <div>
+              <span>Tools</span>
+              <strong>{project.tools}</strong>
+            </div>
+          </aside>
+
+          <div className="project-detail__story">
+            <article>
+              <p className="eyebrow">Challenge</p>
+              <h2>{project.challenge}</h2>
+            </article>
+
+            <article>
+              <p className="eyebrow">Outcome</p>
+              <p>{project.outcome}</p>
+            </article>
+
+            <article>
+              <p className="eyebrow">Process</p>
+              <div className="detail-steps">
+                {project.process.map((step, index) => (
+                  <div className="detail-step" key={step}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <p>{step}</p>
+                  </div>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="project-detail__nav">
+        <div className="frame project-detail__nav-grid">
+          <a href={`#/project/${previousProject.id}`}>
+            <span>Previous</span>
+            <strong>{previousProject.title}</strong>
+          </a>
+          <a href={`#/project/${nextProject.id}`}>
+            <span>Next</span>
+            <strong>{nextProject.title}</strong>
+          </a>
+        </div>
+      </section>
+    </main>
   );
 }
 
